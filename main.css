@@ -1,12 +1,41 @@
+
+.hello {
+  font:15px 'Times New Roman';
+  opacity: 0;
+}
+
+.hello:hover {
+  opacity: 1;
+  background-color: white;
+  
+  .circle {
+    opacity: 1;
+  }
+}
+
 .header {
     padding-bottom: 20px;
     margin-bottom: 20px;
-}
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    box-shadow: 2px 1px 5px #969696;
 
-.header > h3, h5 {
-    margin: 0;
-    padding-top: 20px;
+}
+.new_title {
+  font-size: 15px;
+    font-family: 'Sans-serif';
+    color: black;
     text-align: center;
 }
+.header > h3, h5 {
+    margin: 0;
+    padding-top: 10px;
+    text-align: center;
+    font-family: 'Times New Roman';
+}
+
+
+
+
 
 /* Include any custom CSS styling here! */

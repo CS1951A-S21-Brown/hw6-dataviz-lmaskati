@@ -1,28 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <meta charset="utf-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <title>Assignment 6 &laquo; Data Visualization Dashboard&raquo;</title>
         <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
         <link rel="stylesheet" href="main.css"/>
         <!--Feel free to add more CSS files as needed-->
         <script type="text/javascript" src="https://d3js.org/d3.v5.min.js"></script>
     </head>
+<style>
+body {
+  font-family: 'Sans-Serif';
+}
+
+</style>
 <body>
     <div class="header">
-        <h3>Assignment 6 &laquo; Data Visualization Dashboard &raquo;</h3>
+        <h3>Netflix Visualization Dashboard</h3>
+        <h5>Find out what's popping.</h5>
     </div>
     <!--  We included a basic HTML structure for the 3 graphs here. Feel free to change this if you'd like  -->
     <div class="row">
         <div class="col-lg-6">
+            <h3></h3>
             <div id="graph1"></div>
-            <div id="graph2"></div><br/>
+            <div id=select_stuff style="
+    text-align: center;">
+            Select a year: 
+            <select id="selectButton"></select>
+        </div>
+            <div id="graph2">
+                
+                <h3></h3>
+            </div>
+
+            <br/>
         </div>
         <div class="col-lg-6">
-            <div id="graph3"></div>
+            <div class="new_title">Actors Network Graph (2019-2020)</div>
+            <span>It might take a second to load, but it'll be worth it! Zoom in, move around. Hover to see actors' names.</span>
+            <div id="graph3">
+          
+            </div>
+            
         </div>
     </div>
+
+    <div>
+        <h3 style="
+    text-align: center;">Written Questions</h3>
+        <ol>
+            <li>I worked with the Netflix dataset. Here's how I answered all the questions:
+                <ul>
+                    <li>Part 1: I was asked to show the "number of titles per genre on Netflix". I used the "listed_in" column in the dataset (which gives you ALL the genres for a specific entry) and split this list of genres into individual genres for each entry in the dataset. I filtered out the null titles and then counted the number of times each individual genre appeared and displayed that using a bar graph. Note that in my bar graph, I am  displaying the top 15 genres for the sake of clarity, as otherwise my graph would be very cluttered. </li>
+                    <li>Part 2: I was asked to show the "average runtime of movies by release year." My graph is a box plot which represents the "average" number of movies for a given year (the user can select the release year from a dropdown). The reason why I chose a box plot, is because I thought it best answered the question. In addition to displaying the mean, the box plot also shows you the lower and upper quartiles and displays the spread of data. As a result, it gives you a better sense of what the "average" runtime is than just displaying the mean would. Note that in my pre-processing I filtered out all the entries in the dataset that were NOT of type "Movie" since the question specifically asks for the runtime of movies. I cleaned the data such that the "duration" only included actual timings (not the number of seasons) of the movie (ie. they needed to be of the form "x min" rather than "x season"). Also I limited the release date years to after 2000, because there was more data for these years and also these years are a lot more relevant since they are  recent.</li>
+                    <li>Part 3: I was asked to display "a flow chart where each actor is a node, and a link refers to a movie they both acted in". My visualization is a flow network that visualizes this by showing the connections between acctors based on movies they've acted in together. To make my data more visually appealing and my graph less cluttered, I chose to only display data from the years 2019-2020. I also chose not to display nodes with less than 5 edges as this resulted in a lot of individual clumps of data and did not visualize the network well.</li>
+
+                </ul>
+
+
+            </li>
+
+            <li>
+                <ul>
+                    <li> D3 allows for user interaction with the data visualizations, which really improves the user experience. For example, d3 takes advantage of mouse interaction and allows for tooltips when you hover on part of a visualization. I used this extensively in my flow chart which definitely improved my visualization because it limited the clutter that would have been created from displaying all the labels at the same time. </li>
+                    <li> D3 supports a variety of different visualizations right from simple bar charts to fancy Sanky diagrams and networks, etc. This was very helpful as it allowed me to select the precise visualization that I thought would best answer the question I was responding to. As a result, the variety of visualizations provided by D3 really improved my visualizations. </li>
+                    <li> D3 has several transitions which allows you to animate your data and make it look more visually appealing. I used this in my box plot. This is very helpful as it animates your visualization and really improves the quality as a result because it makes your visualizations more engaging.
+                </ul>
+
+            </li>
+            <li>
+                <ul>
+                    <li>Since D3 is a javascript library its purpose is primarily limited to the client side and working in the browser. That means if I wanted to create a visualization for a backend system (that didn't have a a frontend component) I would have to use another library  like Matplotlib. </li>
+                    <li>D3 is not supported on olders browsers such as Internet Explorer 8, which means its accessibility is limited. In that regard, it would be better to use a library that supports all browsers so your visualizations can be accessed by everyone.</li>
+                    <li>The syntax of D3 is quite complicated and other libraries like Matplotlib have a much simpler syntax to achieve the same functionality. Thereffore, if I was short on time and needed to create a visualization that was supported by Matplotlib, I would use it instead of D3 since it would be faster.</li>
+                </ul>
+
+             </li>
+             <li>I think color blind users would find my dashboard accessible. This is because I followed the advice in the readings on “Why Accessibility Is at the Heart of Data Visualization,” and made sure that my visualizations do not RELY on color - instead, they have clearly labelled data points to guide the user. Furthermore, I followed the color contrast guidelines to ensure that my graph is accessible to colorblind users. To cater to people with cognitive disabilities, I did  not use any metaphors or symbols, incase they interpret my information in a  way I did not intend. Since my box  plot has animations, people with epilepsy, ADHD, or cognitive disabilities might have more difficulty with it. In the future, I would make this more accessible by giving the user control of the animation.
+
+
+</li>
+
+            <li>Reflecting on the stages of your design and implementation process, the main factors that prevented me from making my dashboard more accessible were there requirements of the assignment. For instance, the “A Comprehensive Guide to Accessible Data Visualization” reading describe how one should avoid "complex tooling" (such as dropdowns and other interactive  elements) and avoid "hover overlays" (like tooltips), however these were part of our requirements. Another factor that prevented me from making my dashboard more accessible was limited time that didn't allow for user testing. Ideally, I would have liked to test my design on a variety of users to get feedback and rework my design to make sure it is accessible.</li>
+        </ol>
+    </div>
+    <div>
+        <h3 style="
+    text-align: center;">Extra Credit</h3>
+    <ul> 
+        <li>I implemented dynamic stats calculation is showing box plot whiskers. The reason why it is dynamic is because the user can select which year to visualize the data for and the box plot will update based on the user's selection. The reason why it is statistical is because it visualizes the spread of the data and calculates the upper and lower quartiles of the data, in addition the the mean.</li>
+        <li>I implemented a flow chart for part 3 as visualized above. </li>
+    </ul>
+</div>
     <!--Feel free to add more JavaScript files as needed-->
-    <script type="text/javascript" src="main.js"></script>
+    <script type="text/javascript">
+        // Define margins for SVG
+        const margin = {top: 40, right: 100, bottom: 40, left: 200};
+        // TODO: Define the number of examples to display on the graph
+        const NUM_EXAMPLES = 15;
+    </script>
+    <script src="main.js"></script>
+    <script src="main2.js"></script>
+    <script src="main3.js"></script>
+    
 </body>
 </html>
